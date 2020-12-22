@@ -10,7 +10,9 @@ RUN venv/bin/pip install -r requirements.txt
 RUN venv/bin/pip install gunicorn
 
 COPY app app
-COPY app.py ./
+COPY migrations migrations
+COPY config.py ./
+COPY twitter-app.py ./
 COPY boot.sh ./
 
 RUN chmod +x boot.sh

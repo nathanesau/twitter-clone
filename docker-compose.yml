@@ -1,3 +1,5 @@
+# NOTE: docker-compose will create network automatically
+# this allows the containers to communicate with each other
 version: '2.1'
 
 services:
@@ -8,7 +10,6 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
-  # use sqlite (no postgres required)
   twitter-app:
     image: twitter-app
     container_name: twitter-app
@@ -16,7 +17,4 @@ services:
     ports:
       - 5000:5000
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:////data/twitter-clone.db
-      - REDIS_HOST=127.0.0.1
-      - SECRET_KEY=vZ9YVje1aU
-    command: ["./boot.sh"]
+      - ELASTICSEARCH_URL=<your_ip>:9200
