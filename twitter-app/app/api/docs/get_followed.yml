@@ -1,0 +1,13 @@
+Return list of users that user is following
+Requires authentication token
+---
+parameters:
+  - name: id
+    in: path
+    description: unique identifier for the user
+    required: true
+    type: string
+    default: "1"
+responses:
+  200:
+    description: List of users that user is following

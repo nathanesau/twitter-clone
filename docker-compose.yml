@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  twitter-search:
+    image: twitter-search
+    container_name: twitter-search
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+  # use sqlite (no postgres required)
+  twitter-app:
+    image: twitter-app
+    container_name: twitter-app
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:////data/twitter-clone.db
+      - REDIS_HOST=127.0.0.1
+      - SECRET_KEY=vZ9YVje1aU
+    command: ["./boot.sh"]
