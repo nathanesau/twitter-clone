@@ -3,18 +3,44 @@
 version: '2.1'
 
 services:
-  twitter-search:
-    image: twitter-search
-    container_name: twitter-search
+  es01:
+    image: elasticsearch:7.10.1
+    container_name: es01
     restart: always
+    environment:
+      - node.name=es01
+      #- cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      #- bootstrap.memory_lock=true
+      #- "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    #volumes:
+    #  - data01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
-      - 9300:9300
+    networks:
+      - elastic
   twitter-app:
+    build: twitter-app
     image: twitter-app
     container_name: twitter-app
     restart: always
     ports:
       - 5000:5000
+    networks:
+      - elastic
     environment:
-      - ELASTICSEARCH_URL=<your_ip>:9200
+      - ELASTICSEARCH_URL=http://es01:9200
+    depends_on:
+      - es01
+
+#volumes:
+#  data01:
+#    driver: local
+
+networks:
+  elastic:
+    driver: bridge

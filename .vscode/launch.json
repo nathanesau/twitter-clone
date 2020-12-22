@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: twitter-app (twitter-app.py)",
+        "type": "python",
+        "request": "launch",
+        "module": "flask",
+        "env": {
+          "FLASK_APP": "twitter-app.py",
+          "FLASK_ENV": "development",
+          "FLASK_DEBUG": "1"
+        },
+        "args": [
+          "run",
+          "--port=5000"
+        ],
+        "jinja": true,
+        "cwd": "${workspaceFolder}/twitter-app"
+      }
+    ]
+  }

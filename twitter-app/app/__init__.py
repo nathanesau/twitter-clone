@@ -28,7 +28,7 @@ def create_app():
     bootstrap.init_app(app)
     moment.init_app(app)
     swagger.init_app(app)
-    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']], verify_certs=True) \
         if app.config['ELASTICSEARCH_URL'] else None
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
