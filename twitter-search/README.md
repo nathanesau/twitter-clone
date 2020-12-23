@@ -14,7 +14,7 @@ docker tag twitter-search nathanesau/twitter-clone:twitter-search
 docker push nathanesau/twitter-clone:twitter-search
 ```
 
-for digitalocean, the docker-compose configuration doesn't work well. instead, use:
+in case you want to install elasticsearch as a service (not needed):
 
 ```bash
 # install elasticsearch
