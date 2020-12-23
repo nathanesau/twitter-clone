@@ -1,6 +1,6 @@
 # NOTE: docker-compose will create network automatically
 # this allows the containers to communicate with each other
-version: '2.1'
+version: '3.4'
 
 services:
   #twitter-search:
@@ -30,12 +30,13 @@ services:
     restart: always
     ports:
       - 5000:5000
+    network_mode: host
     #networks:
     #  - elastic
     environment:
-      - ELASTICSEARCH_URL=http://localhost:9200
-    depends_on:
-      - twitter-search
+      - ELASTICSEARCH_URL=http://127.0.0.1:9200/
+    #depends_on:
+    #  - twitter-search
 
 #volumes:
 #  data01:
