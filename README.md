@@ -1,6 +1,10 @@
 # twitter-clone
 
-simple twitter-clone. bring entire project up by just running docker-compose.
+for digital ocean docker-compose is modified.
+
+elasticsearch should be installed as linux service.
+
+you can still use docker-compose for other services.
 
 ```bash
 # bring up project

@@ -3,26 +3,26 @@
 version: '2.1'
 
 services:
-  twitter-search:
-    image: nathanesau/twitter-clone:twitter-search
-    container_name: twitter-search
-    restart: always
-    environment:
-      - node.name=twitter-search
-      #- cluster.name=es-docker-cluster
-      - discovery.type=single-node
-      #- bootstrap.memory_lock=true
-      #- "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    #volumes:
-    #  - data01:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-    networks:
-      - elastic
+  #twitter-search:
+  #  image: nathanesau/twitter-clone:twitter-search
+  #  container_name: twitter-search
+  #  restart: always
+  #  environment:
+  #    - node.name=twitter-search
+  #    #- cluster.name=es-docker-cluster
+  #    - discovery.type=single-node
+  #    #- bootstrap.memory_lock=true
+  #    #- "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+  #  ulimits:
+  #    memlock:
+  #      soft: -1
+  #      hard: -1
+  #  #volumes:
+  #  #  - data01:/usr/share/elasticsearch/data
+  #  ports:
+  #    - 9200:9200
+  #  networks:
+  #    - elastic
   twitter-app:
     build: twitter-app
     image: nathanesau/twitter-clone:twitter-app
@@ -30,10 +30,10 @@ services:
     restart: always
     ports:
       - 5000:5000
-    networks:
-      - elastic
+    #networks:
+    #  - elastic
     environment:
-      - ELASTICSEARCH_URL=http://twitter-search:9200
+      - ELASTICSEARCH_URL=http://localhost:9200
     depends_on:
       - twitter-search
 
@@ -41,6 +41,6 @@ services:
 #  data01:
 #    driver: local
 
-networks:
-  elastic:
-    driver: bridge
+#networks:
+#  elastic:
+#    driver: bridge
