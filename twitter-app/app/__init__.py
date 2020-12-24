@@ -7,7 +7,7 @@ from flask_moment import Moment
 from flask_cors import CORS
 from flasgger import Swagger
 from elasticsearch import Elasticsearch
-from config import Config, SWAGGER_TEMPLATE
+from config import Config, SWAGGER_TEMPLATE, SWAGGER_CONFIG
 
 
 db = SQLAlchemy()
@@ -17,7 +17,7 @@ login.login_view = "auth.login"
 login.login_message = "Please log in to access this page."
 bootstrap = Bootstrap()
 moment = Moment()
-swagger = Swagger(template=SWAGGER_TEMPLATE)
+swagger = Swagger(template=SWAGGER_TEMPLATE, config=SWAGGER_CONFIG)
 
 
 def create_app():
@@ -33,11 +33,11 @@ def create_app():
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']], verify_certs=True) \
         if app.config['ELASTICSEARCH_URL'] else None
     from app.auth import bp as auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(auth_bp, url_prefix='/twitter-clone/auth')
     from app.main import bp as main_bp
-    app.register_blueprint(main_bp)
+    app.register_blueprint(main_bp, url_prefix='/twitter-clone')
     from app.api import bp as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(api_bp, url_prefix='/twitter-clone/api')
     return app
 
 
