@@ -15,6 +15,24 @@ class Config:
     POSTS_PER_PAGE = 25
 
 
+SWAGGER_CONFIG = {
+    "headers": [
+    ],
+    "specs": [
+        {
+            "endpoint": 'apispec_1',
+            "route": '/twitter-clone/apispec_1.json',
+            "rule_filter": lambda rule: True,  # all in
+            "model_filter": lambda tag: True,  # all in
+        }
+    ],
+    "static_url_path": "/twitter-clone/flasgger_static",
+    # "static_folder": "static",  # must be set by user
+    "swagger_ui": True,
+    "specs_route": "/twitter-clone/apidocs/"
+}
+
+
 SWAGGER_TEMPLATE = {
     "swagger": "2.0",
     "info": {
