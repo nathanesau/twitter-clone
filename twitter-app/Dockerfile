@@ -19,5 +19,8 @@ RUN chmod +x boot.sh
 
 ENV FLASK_APP app.py
 
+# store sqlite data in /data
+RUN mkdir /data
+
 EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]

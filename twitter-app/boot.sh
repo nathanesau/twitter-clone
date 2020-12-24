@@ -1,6 +1,7 @@
 #!/bin/sh
 source venv/bin/activate
 while true; do
+    # create database tables if not exist
     flask db upgrade
     if [[ "$?" == "0" ]]; then
         break
