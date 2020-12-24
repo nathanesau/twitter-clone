@@ -1,4 +1,4 @@
-# twitter-app
+# twitter-search
 
 start up elasticsearch using port 9200 [dockerhub link](https://hub.docker.com/repository/docker/nathanesau/twitter-clone)
 
@@ -14,7 +14,7 @@ docker tag twitter-search nathanesau/twitter-clone:twitter-search
 docker push nathanesau/twitter-clone:twitter-search
 ```
 
-for digitalocean, the docker-compose configuration doesn't work well. instead, use:
+for digitalocean, install elasticsearch as a service instead. use:
 
 ```bash
 # install elasticsearch
@@ -38,6 +38,8 @@ sudo systemctl enable elasticsearch
 
 # make sure it is running
 curl -X GET "localhost:9200"
+
+# NOTE that 9200 port is NOT exposed publicly for security reasons
 ```
 
 a quick python test to make sure es is working:

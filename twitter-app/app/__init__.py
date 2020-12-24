@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_moment import Moment
+from flask_cors import CORS
 from flasgger import Swagger
 from elasticsearch import Elasticsearch
 from config import Config, SWAGGER_TEMPLATE
@@ -21,6 +22,7 @@ swagger = Swagger(template=SWAGGER_TEMPLATE)
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(Config)
     db.init_app(app)
     migrate.init_app(app, db)
