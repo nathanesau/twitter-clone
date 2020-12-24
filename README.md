@@ -10,10 +10,6 @@ docker-compose up -d
 docker-compose down
 ```
 
-dns entries:
+site accessible at http://twitterclone.freeddns.org.
 
-```bash
-# for digital ocean
-# see https://www.dynu.com/
-twitterclone.freeddns.org
-```
+firewall used to prevent access to ports other than 22 (SSH) 80 (HTTP) and 443 (HTTPS).
