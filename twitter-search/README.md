@@ -14,7 +14,7 @@ docker tag twitter-search nathanesau/twitter-clone:twitter-search
 docker push nathanesau/twitter-clone:twitter-search
 ```
 
-for digitalocean, install elasticsearch as a service instead. use:
+instructions for installing elasticsearch as service:
 
 ```bash
 # install elasticsearch

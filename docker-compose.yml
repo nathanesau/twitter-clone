@@ -26,10 +26,13 @@ services:
     image: nathanesau/twitter-clone:twitter-app
     container_name: twitter-app
     restart: always
+    volumes:
+      - data02:/data
     ports:
       - 5000:5000
     network_mode: host
     environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:////data/app.db
       - ELASTICSEARCH_URL=http://127.0.0.1:9200/
     depends_on:
       - twitter-search
@@ -46,4 +49,6 @@ services:
 
 volumes:
   data01:
+    driver: local
+  data02:
     driver: local
