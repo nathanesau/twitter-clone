@@ -1,0 +1,44 @@
+# NOTE: docker-compose will create network automatically
+# this allows the containers to communicate with each other
+version: '3.4'
+
+services:
+  twitter-search:
+    build: twitter-search
+    image: nathanesau/twitter-clone:twitter-search
+    container_name: twitter-search
+    restart: always
+    environment:
+      - node.name=twitter-search
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    network_mode: host
+  twitter-app:
+    build: twitter-app
+    image: nathanesau/twitter-clone:twitter-app
+    container_name: twitter-app
+    restart: always
+    volumes:
+      - data02:/data
+    ports:
+      - 5000:5000
+    network_mode: host
+    environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:////data/app.db
+      - ELASTICSEARCH_URL=http://127.0.0.1:9200/
+    depends_on:
+      - twitter-search
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local

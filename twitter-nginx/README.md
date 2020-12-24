@@ -16,7 +16,7 @@ docker tag twitter-nginx nathanesau/twitter-clone:twitter-nginx
 docker push nathanesau/twitter-clone:twitter-nginx
 ```
 
-install nginx as service:
+install nginx as service (for digital-ocean):
 
 ```bash
 # install nginx
@@ -26,8 +26,7 @@ sudo apt-get install nginx
 sudo systemctl enable nginx
 
 # configuration
-# TODO add site to /etc/nginx/sites-enabled/mysite or similar
-# TODO remove /etc/nginx/sites-enabled/default
+cp twitter-app /etc/nginx/sites-enabled/default
 
 # check configuration
 nginx -t 
